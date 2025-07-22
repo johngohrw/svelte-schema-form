@@ -37,3 +37,5 @@ const defaultPerson: Person = {
   }}
 />;
 ```
+
+For more, have a look at [App.svelte](/src/App.svelte)
