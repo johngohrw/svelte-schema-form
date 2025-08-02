@@ -37,21 +37,21 @@
   >;
   export type FormOptionsOf<T> = FormApiOf<T>["options"];
 
-  export type CustomSchema<T> = CustomSchemaLoose<T>;
-  export type CustomSchemaStrict<T> = SchemaNode<T>;
-  export type CustomSchemaLoose<T> = Partial<SchemaNode<T, true>>;
-  export type CustomSchemaNode<T> = SchemaNode<T>;
+  export type FormSchema<T> = FormSchemaLoose<T>;
+  export type FormSchemaStrict<T> = SchemaNode<T>;
+  export type FormSchemaLoose<T> = Partial<SchemaNode<T, true>>;
+  export type FormSchemaNode<T> = SchemaNode<T>;
 
   type SchemaNode<T, Nullable extends boolean = false> = {
     [key in keyof T]: T[key] extends object[]
       ? ArrayNode<T[key][number], Nullable>
       : T[key] extends any[]
-        ? CustomColumn<T[key]>
+        ? FormColumn<T[key]>
         : T[key] extends object
           ? Nullable extends true
             ? Partial<SchemaNode<T[key]>>
             : SchemaNode<T[key]>
-          : CustomColumn<T[key]>;
+          : FormColumn<T[key]>;
   };
 
   export type ArrayNode<T, Nullable extends boolean = false> = {
@@ -61,7 +61,7 @@
     _defaultItem: T;
   };
 
-  export type CustomColumn<T> = {
+  export type FormColumn<T> = {
     _title: string;
     type?: "text" | "number" | "email" | "checkbox" | "slider" | "date";
     inputRender?: (renderProps: { field: FieldApiOf<T> }) => Element;

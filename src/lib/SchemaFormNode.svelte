@@ -1,16 +1,15 @@
 <script lang="ts" generics="T, U extends Record<any, any>">
   import type {
     ArrayNode,
-    CustomSchema,
-    FieldApiOf,
     FormApiOf,
+    FormSchema,
   } from "./_schemaFormTypes.svelte";
   import SchemaFormNode from "./SchemaFormNode.svelte";
   import SsfTextInput from "./SsfTextInput.svelte";
 
   type SchemaFormNodeProps = {
     form: FormApiOf<T>;
-    node: CustomSchema<U>;
+    node: FormSchema<U>;
     trail: (string | number)[];
   };
   let { form, node, trail, ...restProps }: SchemaFormNodeProps = $props();
@@ -41,7 +40,7 @@
                     {form}
                     node={arrayNode[
                       key as keyof typeof arrayNode
-                    ] as CustomSchema<U[keyof U]>}
+                    ] as FormSchema<U[keyof U]>}
                     trail={[...trail, i, key]}
                   />
                 {/each}
@@ -83,7 +82,7 @@
   {#each Object.keys(node) as key}
     <SchemaFormNode
       {form}
-      node={node[key] as CustomSchema<U[keyof U]>}
+      node={node[key] as FormSchema<U[keyof U]>}
       trail={[...trail, key]}
     />
   {/each}

@@ -1,7 +1,8 @@
 <script lang="ts">
-  import type { CustomSchema } from "./lib/_schemaFormTypes.svelte";
-  import CustomForm from "./lib/SchemaForm.svelte";
+  import type { FormSchema } from "./lib/_schemaFormTypes.svelte";
+  import SchemaForm from "./lib/SchemaForm.svelte";
 
+  // step 1: define a type interface for the form inputs
   type Person = {
     name: string;
     dob: string;
@@ -19,21 +20,8 @@
     }[];
   };
 
-  const defaultPerson: Person = {
-    name: "",
-    dob: "",
-    contactInfo: {
-      email: "",
-      phone: "",
-      address: "",
-      city: "",
-      postcode: 0,
-      country: "",
-    },
-    hobbies: [],
-  };
-
-  const schema: CustomSchema<Person> = {
+  // step 2: create a FormSchema which is essentially your form's config
+  const schema: FormSchema<Person> = {
     name: { _title: "Name" },
     dob: { _title: "Date of Birth" },
     contactInfo: {
@@ -57,11 +45,27 @@
       },
     },
   };
+
+  const defaultPerson: Person = {
+    name: "",
+    dob: "",
+    contactInfo: {
+      email: "",
+      phone: "",
+      address: "",
+      city: "",
+      postcode: 0,
+      country: "",
+    },
+    hobbies: [],
+  };
 </script>
 
+<!-- step 3: toss your schema into a SchemaForm component, 
+ provide initial form values, and you're good to go! -->
 <div class="page">
   <div class="form-container">
-    <CustomForm
+    <SchemaForm
       {schema}
       defaultValues={defaultPerson}
       onSubmit={async ({ value }) => {
@@ -78,7 +82,6 @@
 
 <style>
   .page {
-    /* flex flex-col items-center */
     display: flex;
     flex-direction: column;
     align-items: center;

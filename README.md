@@ -11,7 +11,7 @@ type Person = {
   email: string;
 };
 
-const schema: CustomSchema<Person> = {
+const schema: FormSchema<Person> = {
   name: { _title: "Name" },
   age: {
     _title: "Age",
@@ -23,7 +23,13 @@ const schema: CustomSchema<Person> = {
   },
 };
 
-<CustomForm
+const defaultPerson: Person = {
+  name: "",
+  age: 0,
+  email: "",
+};
+
+<SchemaForm
   schema={schema}
   onSubmit={async ({ value }) => {
     console.log("submit", value);
@@ -32,4 +38,3 @@ const schema: CustomSchema<Person> = {
 ```
 
 For a more detailed example, have a look at [App.svelte](/src/App.svelte) and its corresponding [demo output](https://warm-bunny-5f2bd8.netlify.app/).
-

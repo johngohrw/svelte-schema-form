@@ -3,16 +3,16 @@
 
 <script lang="ts" generics="T extends Record<any, any>">
   import { createForm } from "@tanstack/svelte-form";
-  import CustomFormNode from "./SchemaFormNode.svelte";
-  import type { CustomSchema, FormOptionsOf } from "./_schemaFormTypes.svelte";
+  import SchemaFormNode from "./SchemaFormNode.svelte";
+  import type { FormSchema, FormOptionsOf } from "./_schemaFormTypes.svelte";
   import type { Snippet } from "svelte";
 
-  export type CustomFormProps<T> = FormOptionsOf<T> & {
-    schema: CustomSchema<T>;
+  export type SchemaFormProps<T> = FormOptionsOf<T> & {
+    schema: FormSchema<T>;
     submitter?: Snippet;
   };
 
-  let { schema, submitter, ...restProps }: CustomFormProps<T> = $props();
+  let { schema, submitter, ...restProps }: SchemaFormProps<T> = $props();
 
   const form = createForm(() => ({
     ...restProps,
@@ -27,7 +27,7 @@
     form.handleSubmit();
   }}
 >
-  <CustomFormNode {form} node={schema} trail={[]} />
+  <SchemaFormNode {form} node={schema} trail={[]} />
   {#if submitter}
     {@render submitter()}
   {/if}
