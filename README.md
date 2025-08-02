@@ -1,6 +1,6 @@
 # Svelte Schema Form
 
-Typescript schema-based form generation for Svelte.
+Generate complex form UI with a schema that strictly adheres to your types.
 
 ## Example Usage
 
