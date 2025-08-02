@@ -1,92 +1,90 @@
 <script lang="ts">
-  import CustomForm, { type CustomSchema } from "./lib/SchemaForm.svelte";
+  import type { CustomSchema } from "./lib/_schemaFormTypes.svelte";
+  import CustomForm from "./lib/SchemaForm.svelte";
 
   type Person = {
     name: string;
-    age: number;
-    email: string;
-    nest: {
-      nesta: string;
-      nestb: number;
-    };
-    nums: number[];
-    emergencyContacts: {
-      name: string;
+    dob: string;
+    contactInfo: {
+      email: string;
       phone: string;
-      kids: {
-        kidName: string;
-        kidAge: number;
-      }[];
+      address: string;
+      city: string;
+      postcode: number;
+      country: string;
+    };
+    hobbies: {
+      hobbyName: string;
+      interestLevel: number;
     }[];
   };
 
   const defaultPerson: Person = {
     name: "",
-    age: 0,
-    email: "",
-    nest: {
-      nesta: "",
-      nestb: 0,
+    dob: "",
+    contactInfo: {
+      email: "",
+      phone: "",
+      address: "",
+      city: "",
+      postcode: 0,
+      country: "",
     },
-    nums: [],
-    emergencyContacts: [],
+    hobbies: [],
   };
 
   const schema: CustomSchema<Person> = {
-    name: {
-      _title: "Name",
-      type: "text",
+    name: { _title: "Name" },
+    dob: { _title: "Date of Birth" },
+    contactInfo: {
+      email: { _title: "Email" },
+      address: { _title: "Address" },
+      city: { _title: "City" },
+      country: { _title: "Country" },
+      phone: { _title: "Phone Number" },
+      postcode: { _title: "Postcode" },
     },
-    age: {
-      _title: "Age",
-      type: "number",
-    },
-    email: {
-      _title: "Email",
-      type: "email",
-    },
-    nest: {
-      nesta: { _title: "Nesta", type: "email" },
-      nestb: { _title: "Nestb", type: "text" },
-    },
-    nums: {
-      _title: "Some Numbers",
-      type: "number",
-    },
-    emergencyContacts: {
-      _title: "Emergency Contacts",
-      _arrayOf: {
-        name: { _title: "Name" },
-        phone: { _title: "EC phone" },
-        kids: {
-          _title: "Kids",
-          _arrayOf: {
-            kidName: { _title: "Kid Name" },
-            kidAge: { _title: "Kid Age" },
-          },
-          _defaultItem: {
-            kidName: "",
-            kidAge: 0,
-          },
-        },
-      },
+    hobbies: {
+      _title: "Hobbies",
+      _titleSingular: "Hobby",
       _defaultItem: {
-        kids: [],
-        name: "",
-        phone: "",
+        hobbyName: "",
+        interestLevel: 0,
+      },
+      _arrayOf: {
+        hobbyName: { _title: "Name" },
+        interestLevel: { _title: "Interest Level" },
       },
     },
   };
 </script>
 
-<div class="flex flex-col items-center">
-  <div class="w-full max-w-[500px]">
+<div class="page">
+  <div class="form-container">
     <CustomForm
       {schema}
       defaultValues={defaultPerson}
       onSubmit={async ({ value }) => {
-        console.log("submit", value);
+        console.log("on submit", value);
       }}
+      {submitter}
     />
   </div>
 </div>
+
+{#snippet submitter()}
+  <button type="submit">Submit</button>
+{/snippet}
+
+<style>
+  .page {
+    /* flex flex-col items-center */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .form-container {
+    width: 100%;
+    max-width: 300px;
+  }
+</style>
