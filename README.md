@@ -2,6 +2,12 @@
 
 Generate complex forms on svelte5 with just a schema with strict typing.
 
+
+## Dependencies
+
+- svelte >= 5.0.0
+- @tanstack/svelte-form >= 1.14.2
+
 ## Example Usage
 
 ```ts
@@ -38,3 +44,16 @@ const defaultPerson: Person = {
 ```
 
 For a more detailed example, have a look at [App.svelte](/src/App.svelte) and its corresponding [demo output](https://warm-bunny-5f2bd8.netlify.app/).
+
+## Before you use
+
+While usable (you'd have to get your hands dirty), this is still very much a work in progress and many features are still missing. The goal is to be able to customize every aspect and behavior of the form by configuring the schema itself.
+
+## To do
+- Default input renderers for each field based on a preset type (e.g. 'number', 'email', 'phone', 'datetime', etc.) 
+- Custom input renderers (render whatever you want for a field input)
+- Props for styling fields and labels
+- Validation
+- Event handlers (onChange, onClick, onBlur, etc.)
+
+
