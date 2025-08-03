@@ -1,7 +1,6 @@
 # Svelte Schema Form
 
-Generate complex forms on svelte5 with just a schema with strict typing.
-
+Generate complex svelte5 forms with a strictly-typed schema.
 
 ## Dependencies
 
