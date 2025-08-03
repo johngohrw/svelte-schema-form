@@ -36,7 +36,7 @@ const schema: FormSchema<Person> = {
 />;
 ```
 
-For a more detailed example, have a look at [App.svelte](/src/App.svelte) and its corresponding [demo output](https://warm-bunny-5f2bd8.netlify.app/).
+For a complete example, have a look at [App.svelte](/src/App.svelte) and its corresponding [demo output](https://warm-bunny-5f2bd8.netlify.app/).
 
 ## Before you use
 
