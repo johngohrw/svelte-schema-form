@@ -28,12 +28,6 @@ const schema: FormSchema<Person> = {
   },
 };
 
-const defaultPerson: Person = {
-  name: "",
-  age: 0,
-  email: "",
-};
-
 <SchemaForm
   schema={schema}
   onSubmit={async ({ value }) => {
